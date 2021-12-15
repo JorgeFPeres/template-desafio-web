@@ -95,7 +95,7 @@ const questions = [
 const command = {
   name: 'evaluate',
   run: async (toolbox) => {
-    let { print, prompt } = toolbox
+    let { print, template, prompt } = toolbox
 
     print.info('Bem vindo a CLI de avaliação do teste do time Web da Stone')
 
@@ -103,6 +103,12 @@ const command = {
     let answer = await prompt.ask(questions)
 
     answer = JSON.parse(JSON.stringify(answer))
+
+    await template.generate({
+      template: 'evaluation.md',
+      target: 'dist/evaluation.md',
+      props: answer,
+    })
   },
 }
 
