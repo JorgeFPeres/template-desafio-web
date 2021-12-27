@@ -26,6 +26,11 @@ const questionTemplate = { type: 'select', choices }
 
 const questions = [
   {
+    type: 'input',
+    message: 'Qual o seu nome?',
+    name: 'evaluator',
+  },
+  {
     ...questionTemplate,
     name: 'delivery.0',
     message: questionMessages.delivery[0],
@@ -99,14 +104,13 @@ const command = {
 
     print.info('Bem vindo a CLI de avaliação do teste do time Web da Stone')
 
-    // ask a series of questions
     let answer = await prompt.ask(questions)
 
     answer = JSON.parse(JSON.stringify(answer))
 
     await template.generate({
       template: 'evaluation.md',
-      target: 'dist/evaluation.md',
+      target: '../../dist/evaluation.md',
       props: answer,
     })
   },
